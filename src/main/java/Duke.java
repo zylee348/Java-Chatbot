@@ -1,19 +1,19 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.LocalDateTime;
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+=======
+>>>>>>> 8bf586af9f2e50859f248573fcfc59edffd3c894
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
 
+<<<<<<< HEAD
     private static ArrayList<Task> taskList;
+    private static String filePath = "data/duke.txt";
     private static final String LINE = "____________________________________________________________";
 
     private static final String LOGO = "Hello from\n" +
@@ -160,7 +160,7 @@ public class Duke {
 
     public static ArrayList<Task> loadTask() throws IOException {
         try {
-            File taskFile = new File("data/duke.txt");
+            File taskFile = new File(filePath);
             if (!taskFile.exists()) {
                 return taskList;
             } else {
@@ -216,102 +216,16 @@ public class Duke {
             System.out.println("Check date format.");
         }
         return taskList;
+=======
+    public void run() {
+        UI.getGREETING();
+        UI.getLINE();
+        Parser.parseInput();
+>>>>>>> 8bf586af9f2e50859f248573fcfc59edffd3c894
     }
 
-    public static void save() {
-        try {
-            File file = new File("data/duke.txt");
-            File directory = new File("data");
 
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-
-            FileWriter myWriter = new FileWriter(file);
-            for (Task t: taskList) {
-                myWriter.write(t.toStringFileFormat() + System.lineSeparator());
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            throw new DukeException("Save issue.");
-        }
-    }
-
-        public static void main(String[] args) {
-        //System.out.println(LOGO);
-        System.out.println(GREETING);
-        System.out.println(LINE);
-
-        Scanner sc = new Scanner(System.in);
-        boolean running = true;
-
-        while (running) {
-            try {
-                loadTask();
-                String str1 = sc.nextLine();
-                String[] wordArray = str1.strip().split(" ", 2);
-                String word1 = wordArray[0].toLowerCase();
-                String str2 = "";
-
-                if (wordArray.length >= 2) {
-                    str2 = wordArray[1];
-                }
-
-
-                switch(word1) {
-
-                    case "bye":
-                        end();
-                        running = false;
-                        break;
-
-                    case "list":
-                        printList(taskList);
-                        break;
-
-                    case "mark":
-                        markAsDone(taskList, str2);
-                        break;
-
-                    case "unmark":
-                        markAsUndone(taskList, str2);
-                        break;
-
-                    case "delete":
-                        deleteTaskfromArray(taskList, str2);
-                        break;
-
-                    case "deadline":
-                        addTaskToArray(str2, Task.TYPE.DEADLINE);
-                        break;
-
-                    case "todo":
-                        addTaskToArray(str2, Task.TYPE.TODO);
-                        break;
-
-                    case "event":
-                        addTaskToArray(str2, Task.TYPE.EVENT);
-                        break;
-
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-                }
-                save();
-
-            } catch (InputMismatchException e) {
-                System.out.println(LINE);
-                System.out.println("Invalid input");
-                System.out.println(LINE);
-
-            } catch (DukeException e) {
-                System.out.println(LINE);
-                System.out.println(e);
-                System.out.println(LINE);
-
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
