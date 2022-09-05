@@ -94,6 +94,7 @@ public class TaskList {
     }
 
     public static int taskListLength() {
+        assert (taskList.size() > 0);
         return taskList.size();
     }
 
@@ -145,6 +146,12 @@ public class TaskList {
         return UI.markAsUndoneUI(tsk);
     }
 
+    /**
+     * Filters the taskList by the keyword.
+     *
+     * @param keyword the task to search for
+     * @return string of the tasks with the word
+     */
     public static String findTasks(String keyword) {
         ArrayList<Task> filteredList = new ArrayList<>(taskList.stream()
                 .filter(task -> task.containsWord(keyword))
